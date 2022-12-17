@@ -1,63 +1,164 @@
-# CodeIgniter 4 Application Starter
+# Aplicación de Gestión de Prácticas en Empresa
 
-## What is CodeIgniter?
+## Una aplicación para aprendizaje en DAW
+#### Por favor, mi actual nivel de programación es bastante moderado. Utilice este código con cuidado.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](http://codeigniter.com).
+<br>
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+### Índice
+- [Autor](#autor)
+- [Contexto](#contexto)
+- [Objetivo](#objetivo)
+- [Detalle](#detalle)
+- [Especificaciones mínimas](#especificaciones-mínimas)
+- [Procedimiento a seguir](#procedimiento-a-seguir)
+- [Criterios de calificación](#criterios-de-calificación)
+- [Licencia](#licencia)
 
-More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
+<br>
 
-The user guide corresponding to this version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
+## Autor
+Miguel Carmona
+<a href="https://miguelcarmona.com">https://miguelcarmona.com</a>
 
-## Installation & updates
+<br>
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+### CONTEXTO
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+El control de los alumnos que realiza las prácticas en empresa tanto en la etapa de formación DUAL como en el módulo de FCT del último trimestre es un procedimiento muy importante ya que mantener de forma ordenada la información es indispensable para poder homologar el ciclo. Actualmente esa gestión se se realiza de forma totalmente manual, sin ninguna herramienta informática más allá de una hoja de cálculo.
 
-## Setup
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+Hay que tener en cuenta que un alumno puede realizar prácticas tanto en alternancia (opcional) como en Formación en centros de trabajo (obligatoria). 
 
-## Important Change with index.php
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+De forma particular a cada alumno se se asigna al inicio de sus prácticas:
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+* un profesor tutor
+* una empresa donde realizar las prácticas
+* el total de horas  que deben durar las prácticas.
 
-**Please** read the user guide for a better explanation of how CI4 works!
+<br>
 
-## Repository Management
+### OBJETIVO 
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+Realizar el interfaz de una aplicación web para gestionar el personal en prácticas del centro y llevar el control de las mismas.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+<br>
 
-## Server Requirements
+### DETALLE
 
-PHP version 7.3 or higher is required, with the following extensions installed:
+Será necesario administrar la información relacionada con:
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+1. Alumnos
+2. Profesores
+3. Empresas
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Los usuarios de la aplicación podrán ser tanto los propios alumnos como los profesores encargados de la tutorización de las prácticas. Un alumno tiene un único profesor responsable y un profesor es responsable de varios alumnos.
 
-- json (enabled by default - don't turn it off)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
-- xml (enabled by default - don't turn it off)
+Igualmente un alumno tiene una única empresa asignada y una empresa puede tener a varios alumnos.
+
+Los profesores serán los administradores de la aplicación y serán los responsables de añadir alumnos y empresas a la aplicación.
+
+Los alumnos solo podrán editar su tabla de Actividades diarias. El objetivo es que diariamente puedan entrar en la aplicación y añadir una entrada en dicha tabla indicando:
+
+* Fecha
+* Tipo de práctica (Dual o FCT)
+* Total horas realizadas ese día
+* Actividad realizada
+* Observaciones o incidencias
+
+La información necesaria para gestionar de cada alumno es:
+
+* Nombre
+* Apellidos
+* Contraseña de acceso
+* DNI
+* Fecha nacimiento
+* Email
+* Teléfono de contacto
+* Empresa donde realiza las prácticas
+* Profesor Tutor asignado
+* Nº de horas totales para realizar en DUAL
+* Nº de horas totales para realizar en FCT
+* Observaciones
+
+La información necesaria para las empresas es:
+* Nombre de la empresa
+* Telefono
+* Email
+* Responsable de empresa
+* Observaciones o incidencias
+
+La información de cada profesor es:
+* Nombre
+* Apellidos
+* Contraseña de acceso
+* Correo electrónico
+
+<br>
+
+### ESPECIFICACIONES MÍNIMAS
+
+Deberán diseñarse todas las páginas necesarias usando HTML, CSS y Javascript. Se pueden utilizar Frameworks de todo tipo.
+
+No será necesario conectar con el back-end, por lo que **deberán usarse datos de ejemplo en todas las pantallas/páginas.**
+
+Al arranque de la aplicación deberá mostrar una ventana de Login donde el usuario se autentique con su correo y contraseña.
+
+Si el usuario es de tipo profesor deberá poder:
+
+* Ver el listado de todos los alumnos asignados a él y pulsando sobre un alumno podrá entrar a una ficha en la que se muestren todos sus datos.
+* Ver el listado completo de Actividades Diarias de un alumno concreto en formato de tabla.
+* Ver el total de horas que ha realizado un alumno en sus prácticas y las que le quedan pendientes (tanto DUAL como FCT)
+* Crear un nuevo alumno (quedará asignado al profesor que lo haya creado)
+* Modificar los datos personales de un alumno
+* Borrar un alumno
+* Asignar una empresa a un alumno
+* Crear una empresa
+* Modificar los datos de una empresa
+
+Si el usuario es tipo alumno deberá poder:
+
+* Ver el listado de todas sus Actividades Diarias en formato de tabla
+* Añadir una nueva entrada en la tabla
+* Editar una entrada ya existente
+* Eliminar una entrada ya existente
+* Saber cuantas horas de práctica ha realizado y las que le quedan pendientes (tanto DUAL como FCT)
+* Ver la información de la empresa asignada y del profesor tutor
+* Los profesores inicialmente solo se podrán crear, editar y eliminar de forma manual desde la base de datos.
+
+En todo caso, en la aplicación deberá primar la **facilidad de uso** (usa de manera que no deba ser necesario ningún tipo de formación ni indicación para poder usar el programa).
+
+Además de entregar el código completo del interfaz web, habrá que entregar  la siguiente documentación
+
+<br>
+
+### PROCEDIMIENTO A SEGUIR
+
+Habrá que documentar todo el proceso que se ha seguido para realizar la aplicación y justificar las decisiones que se tomen (elección de IDE, frameworks, diseños de ventanas, etc...).
+
+El despliegue en un servidor no será obligatorio, pero si será recomendable hacerlo.
+
+Se realizará una primera entrega antes de la finalización del mes de octubre con todo lo realizado hasta ese momento y un pequeño vídeo descriptivo para poder hacer un seguimiento adecuado.
+
+Una vez implementado, realizar una demostración completa, grabarla en vídeo (screencast), donde se vean con detalle todas las opciones y añadirla a la tarea. 
+
+Debéis subir el repositorio con el código a vuestras cuentas de GitHub y compartir el enlace todos los miembros del grupo.
+
+<br>
+
+### CRITERIOS DE CALIFICACIÓN 
+
+La calificación de esta tarea se realizará a todos los miembros del grupo por igual.
+
+Para cada uno de los módulos se puntuará:
+* Resolución adecuada del problema: 5 puntos
+* Documentación presentada, Presentación, estructura y formato: 3 puntos
+* Creatividad y mejoras adicionales: 2 puntos
+(La calificación final de esta actividad se pondera en base a un máximo de 10 puntos) 
+
+<br>
+
+## Licencia
+[Copyright Miguel Carmona](https://miguelcarmona.com)
+
